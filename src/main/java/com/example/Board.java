@@ -185,7 +185,14 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         Square endSquare = (Square) this.getComponentAt(new Point(e.getX(), e.getY()));
         
         //using currPiece
-        
+        if (fromMoveSquare != null)
+        {
+            if (currPiece != null && currPiece.getLegalMoves(this, fromMoveSquare).contains(endSquare))
+            {
+                endSquare.put(currPiece);
+                fromMoveSquare.removePiece();
+            }
+        }
        
         fromMoveSquare.setDisplay(true);
         currPiece = null;
