@@ -103,7 +103,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
     void initializePieces() {
     	
     	board[0][3].put(new Piece(true, RESOURCES_BPAWN_PNG));
-        board[7][4].put(new Piece(true, RESOURCES_WPAWN_PNG));
+        board[7][5].put(new Piece(false, RESOURCES_WPAWN_PNG));
 
     }
 
@@ -194,13 +194,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         Square endSquare = (Square) this.getComponentAt(new Point(e.getX(), e.getY()));
         
         //using currPiece
-        if (fromMoveSquare != null)
-        {
-            if (currPiece != null && currPiece.getLegalMoves(this, fromMoveSquare).contains(endSquare))
-            {
-                endSquare.put(currPiece);
-                fromMoveSquare.removePiece();
-            }
+    if(fromMoveSquare != null && currPiece.getLegalMoves(this, fromMoveSquare).contains(endSquare)){
+            endSquare.put(currPiece);
+            fromMoveSquare.removePiece();
+            
         }
        
         fromMoveSquare.setDisplay(true);

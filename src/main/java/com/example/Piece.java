@@ -61,18 +61,31 @@ public class Piece {
     //please note that your piece must have some sort of logic. Just being able to move to every square on the board is not
     //going to score any points.
     public ArrayList<Square> getLegalMoves(Board b, Square start){
-       if(start.getCol()<7){
-        Square right = b.getSquareArray()[start.getRow()][start.getCol()+1];
-    	    if(right.getOccupyingPiece().getColor()!= color){
-                //Some Code
-            }    
-    }
+        ArrayList<Square> moves = new ArrayList<>();
+        if(color == true){
+            if(start.getRow()<7){
+                
+                Square up = b.getSquareArray()[start.getRow()+1][start.getCol()];
+                moves.add(up);
+                
+            
+            //check down left
+            if(start.getCol()>0&& b.getSquareArray()[start.getRow()+2][start.getCol()-2].isOccupied() && b.getSquareArray()[start.getRow()+2][start.getCol()-2].getOccupyingPiece().getColor() != color){
+                Square downLeft = b.getSquareArray()[start.getRow()+2][start.getCol()-2];
+                moves.add(downLeft);
+            }
+            //check down right
 
-        ArrayList<Square> moves = new ArrayList<Square>();
-    if (start.getRow()<7){
-        Square up = b.getSquareArray()[start.getRow()+1][start.getCol()];
-        moves.add(up);
+            if(start.getCol()>0&& b.getSquareArray()[start.getRow()+2][start.getCol()+2].isOccupied() && b.getSquareArray()[start.getRow()+2][start.getCol()+2].getOccupyingPiece().getColor() != color){
+                Square downRight = b.getSquareArray()[start.getRow()+2][start.getCol()+2];
+                moves.add(downRight);
+     }
+
+
+            }
+        }
+        return moves;
     }
-    return moves;
-}
+    
+
 }
