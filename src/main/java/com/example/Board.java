@@ -104,7 +104,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
     	
     	board[0][3].put(new Piece(true, RESOURCES_BPAWN_PNG));
         board[7][5].put(new Piece(false, RESOURCES_WPAWN_PNG));
-
+         board[7][1].put(new Piece(false, RESOURCES_WPAWN_PNG));
     }
 
     public Square[][] getSquareArray() {
@@ -184,6 +184,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
     //should move the piece to the desired location only if this is a legal move.
     //use the pieces "legal move" function to determine if this move is legal, then complete it by
     //moving the new piece to it's new board location. 
+
+
+    // Precondition: A mouse event occurs and any referenced squares or pieces are properly initialized.
+    // Postcondition: The board updates based on the mouse action and the display is refreshed.   
     @Override
     public void mouseReleased(MouseEvent e) {
         for (Square[] row : board){
