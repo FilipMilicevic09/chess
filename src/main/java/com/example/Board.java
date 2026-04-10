@@ -102,9 +102,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	//it's up to you how you wish to arrange your pieces.
     void initializePieces() {
     	
-    	board[7][3].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[0][5].put(new Piece(true, RESOURCES_WPAWN_PNG));
-         board[0][1].put(new Piece(true, RESOURCES_WPAWN_PNG));
+    	board[4][3].put(new Piece(false, RESOURCES_BPAWN_PNG));
+        board[4][5].put(new Piece(true, RESOURCES_WPAWN_PNG));
+         board[3][1].put(new Piece(true, RESOURCES_WPAWN_PNG));
     }
 
     public Square[][] getSquareArray() {
@@ -172,7 +172,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                 s.setBorder(BorderFactory.createMatteBorder(4,4,4,4,Color.blue));
             }
             for (Square s : currPiece.getControlledSquares(board, fromMoveSquare)) {
-                s.setBorder(BorderFactory.createMatteBorder(4,4,4,4,Color.blue));
+                s.setBorder(BorderFactory.createMatteBorder(4,4,4,4,Color.red));
             }
         
             if (currPiece.getColor() != whiteTurn)
@@ -201,9 +201,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         Square endSquare = (Square) this.getComponentAt(new Point(e.getX(), e.getY()));
         
         //using currPiece
-    if(fromMoveSquare != null && currPiece.getLegalMoves(this, fromMoveSquare).contains(endSquare)){
+    if(fromMoveSquare != null && currPiece.getColor() == whiteTurn &&currPiece.getLegalMoves(this, fromMoveSquare).contains(endSquare)){
             endSquare.put(currPiece);
             fromMoveSquare.removePiece();
+            whiteTurn = !whiteTurn;
             
         }
        

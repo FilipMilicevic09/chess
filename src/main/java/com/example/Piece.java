@@ -56,26 +56,18 @@ public class Piece {
 
         ArrayList<Square> controlled = new ArrayList<>();
 
-        //int row = start.getRow();
-        //int col = start.getCol();
-
-        // Only allow moves within board boundaries
-       // int maxRow = board.length;
-       // int maxCol = board[0].length;
-
-        // Diagonal left
-       // if (row + 1 < maxRow && col - 1 >= 0) {
-            //controlled.add(board[row + 1][col - 1]);
-        //}
-
-        // Diagonal right
-       // if (row + 1 < maxRow && col + 1 < maxCol) {
-        //    controlled.add(board[row + 1][col + 1]);
-      //  }
+      if(color){
         if (start.getRow()<7){
             controlled.add(board[start.getRow()+2][start.getCol()+2]);
             controlled.add(board[start.getRow()+2][start.getCol()-2]);
         }
+    }
+    else{
+        if (start.getRow()>0){
+         controlled.add(board[start.getRow()-2][start.getCol()-2]);
+            controlled.add(board[start.getRow()-2][start.getCol()+2]);
+    }
+    }
 
         return controlled;
     }
@@ -126,7 +118,7 @@ public class Piece {
                 moves.add(down);
 
                 // check diagonal left
-                if (start.getCol() > 0 && b.getSquareArray()[start.getRow() - 2][start.getCol() + 2].isOccupied()
+                if (start.getCol() + 2 < 8 && start.getRow() -2 >= 0 &&b.getSquareArray()[start.getRow() - 2][start.getCol() + 2].isOccupied()
                         && b.getSquareArray()[start.getRow() - 2][start.getCol() + 2].getOccupyingPiece()
                                 .getColor() != color) {
                     Square upLeft = b.getSquareArray()[start.getRow() - 2][start.getCol() + 2];
