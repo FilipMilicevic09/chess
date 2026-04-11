@@ -55,23 +55,24 @@ public class Piece {
     public ArrayList<Square> getControlledSquares(Square[][] board, Square start) {
 
         ArrayList<Square> controlled = new ArrayList<>();
+        int row = start.getRow();
+        int col = start.getCol();
 
-      if(color){
-        if (start.getRow()<7){
-            controlled.add(board[start.getRow()+2][start.getCol()+2]);
-            controlled.add(board[start.getRow()+2][start.getCol()-2]);
+        if (color) { // White Logic
+            // Controls ONLY the diagonal "jump" squares (row + 2, col +/- 2)
+            if (row + 2 < 8) {
+                if (col - 2 >= 0) controlled.add(board[row + 2][col - 2]);
+                if (col + 2 < 8)  controlled.add(board[row + 2][col + 2]);
+            }
+        } else { // Black Logic
+            // Controls ONLY the diagonal "jump" squares (row - 2, col +/- 2)
+            if (row - 2 >= 0) {
+                if (col - 2 >= 0) controlled.add(board[row - 2][col - 2]);
+                if (col + 2 < 8)  controlled.add(board[row - 2][col + 2]);
+            }
         }
-    }
-    else{
-        if (start.getRow()>0){
-         controlled.add(board[start.getRow()-2][start.getCol()-2]);
-            controlled.add(board[start.getRow()-2][start.getCol()+2]);
-    }
-    }
-
         return controlled;
     }
-
     // TO BE IMPLEMENTED!
     // implement the move function here
     // it's up to you how the piece moves, but at the very least the rules should be
@@ -111,29 +112,28 @@ public class Piece {
 
             }
         } else {
-
             if (start.getRow() > 0) {
-
                 Square down = b.getSquareArray()[start.getRow() - 1][start.getCol()];
-                moves.add(down);
-
-                // check diagonal left
-                if (start.getCol() + 2 < 8 && start.getRow() -2 >= 0 &&b.getSquareArray()[start.getRow() - 2][start.getCol() + 2].isOccupied()
-                        && b.getSquareArray()[start.getRow() - 2][start.getCol() + 2].getOccupyingPiece()
-                                .getColor() != color) {
-                    Square upLeft = b.getSquareArray()[start.getRow() - 2][start.getCol() + 2];
-                    moves.add(upLeft);
+                if (!down.isOccupied()) {
+                    moves.add(down);
                 }
-                // check diagonal right
 
-                if (start.getCol() > 0 && b.getSquareArray()[start.getRow() + 2][start.getCol() + 2].isOccupied()
-                        && b.getSquareArray()[start.getRow() + 2][start.getCol() + 2].getOccupyingPiece()
-                                .getColor() != color) {
-                    Square upRight = b.getSquareArray()[start.getRow() + 2][start.getCol() + 2];
-                    moves.add(upRight);
+                // check diagonal left (moving DOWN and LEFT)
+                if (start.getCol() - 2 >= 0 && start.getRow() - 2 >= 0) {
+                    Square diagLeft = b.getSquareArray()[start.getRow() - 2][start.getCol() - 2];
+                    if (diagLeft.isOccupied() && diagLeft.getOccupyingPiece().getColor() != color) {
+                        moves.add(diagLeft);
+                    }
+                }
+
+                // check diagonal right (moving DOWN and RIGHT)
+                if (start.getCol() + 2 < 8 && start.getRow() - 2 >= 0) {
+                    Square diagRight = b.getSquareArray()[start.getRow() - 2][start.getCol() + 2];
+                    if (diagRight.isOccupied() && diagRight.getOccupyingPiece().getColor() != color) {
+                        moves.add(diagRight);
+                    }
                 }
             }
-
         }
         return moves;
     }
