@@ -13,19 +13,12 @@ import javax.imageio.ImageIO;
 
 //you will need to implement two functions in this file.
 public class Pawn2 extends Piece {
-    private final boolean color;
-    private BufferedImage img;
+    
+   
 
-    public Piece(boolean isWhite, String img_file) {
-        this.color = isWhite;
+    public Pawn2(boolean isWhite, String img_file) {
 
-        try {
-            if (this.img == null) {
-                this.img = ImageIO.read(new File(System.getProperty("user.dir") + img_file));
-            }
-        } catch (IOException e) {
-            System.out.println("File not found: " + e.getMessage());
-        }
+       super(isWhite, img_file);
     }
 
     public boolean getColor() {
