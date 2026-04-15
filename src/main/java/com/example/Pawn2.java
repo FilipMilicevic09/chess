@@ -21,20 +21,8 @@ public class Pawn2 extends Piece {
        super(isWhite, img_file);
     }
 
-    public boolean getColor() {
-        return color;
-    }
+   
 
-    public Image getImage() {
-        return img;
-    }
-
-    public void draw(Graphics g, Square currentSquare) {
-        int x = currentSquare.getX();
-        int y = currentSquare.getY();
-
-        g.drawImage(this.img, x, y, null);
-    }
 
     // TO BE IMPLEMENTED!
     // return a list of every square that is "controlled" by this piece. A square is

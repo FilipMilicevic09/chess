@@ -9,7 +9,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 public class Piece {
-    private boolean color;
+    protected boolean color;
     private BufferedImage img;
 
     public Piece(boolean color, String img_file) {
