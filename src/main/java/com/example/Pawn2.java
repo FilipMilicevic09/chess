@@ -1,3 +1,8 @@
+//Filip Milicevic
+
+//Pawn2
+//This specific pawn acts like pawns usually do but they can only eliminate other piece 2 diagonal instead of 1.
+
 package com.example;
 
 import java.awt.Graphics;

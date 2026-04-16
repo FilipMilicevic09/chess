@@ -22,7 +22,7 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class Board extends JPanel implements MouseListener, MouseMotionListener {
 	// Resource location constants for piece images
-    private static final String path = "/src/main/java/com/example/Pictures/";
+    private static final String path = "/workspaces/chess2026/src/main/java/com/example/Pictures/";
     private static final String RESOURCES_WBISHOP_PNG = path+"wbishop.png";
 	private static final String RESOURCES_BBISHOP_PNG = path+"bbishop.png";
 	private static final String RESOURCES_WKNIGHT_PNG = path+"wknight.png";
@@ -102,9 +102,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	//it's up to you how you wish to arrange your pieces.
     void initializePieces() {
     	
-    	board[7][3].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[0][5].put(new Piece(true, RESOURCES_WPAWN_PNG));
-         board[0][1].put(new Piece(true, RESOURCES_WPAWN_PNG));
+    	board[7][3].put(new Pawn2(false, RESOURCES_BPAWN_PNG));
+        board[0][5].put(new Pawn2(true, RESOURCES_WPAWN_PNG));
+         board[0][1].put(new Pawn2(true, RESOURCES_WPAWN_PNG));
     }
 
     public Square[][] getSquareArray() {
