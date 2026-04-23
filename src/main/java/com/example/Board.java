@@ -189,7 +189,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
     //moving the new piece to it's new board location. 
     private boolean isInCheck(boolean color){
         //code HERE
-        return true;
+        return false;
     }
 
     // Precondition: A mouse event occurs and any referenced squares or pieces are properly initialized.
