@@ -102,9 +102,21 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	//it's up to you how you wish to arrange your pieces.
     void initializePieces() {
     	
-    	board[7][3].put(new Pawn2(false, RESOURCES_BPAWN_PNG));
-        board[0][5].put(new Pawn2(true, RESOURCES_WPAWN_PNG));
-         board[0][1].put(new Pawn2(true, RESOURCES_WPAWN_PNG));
+    	
+        board[1][5].put(new Pawn2(true, RESOURCES_WPAWN_PNG));
+        board[1][1].put(new Pawn2(true, RESOURCES_WPAWN_PNG));
+        board[1][3].put(new Pawn2(true, RESOURCES_WPAWN_PNG));
+        board[1][7].put(new Pawn2(true, RESOURCES_WPAWN_PNG));
+        board[0][3].put(new King(true, RESOURCES_WKING_PNG));
+        board[0][4].put(new Queen(true, RESOURCES_WQUEEN_PNG));
+
+         board[6][7].put(new Pawn2(false, RESOURCES_BPAWN_PNG));
+         board[6][1].put(new Pawn2(false, RESOURCES_BPAWN_PNG));
+         board[6][3].put(new Pawn2(false, RESOURCES_BPAWN_PNG));
+         board[6][5].put(new Pawn2(false, RESOURCES_BPAWN_PNG));
+         board[7][3].put(new King(false, RESOURCES_BKING_PNG));
+         board[7][4].put(new Queen(false , RESOURCES_BQUEEN_PNG));
+         
     }
 
     public Square[][] getSquareArray() {
@@ -187,9 +199,38 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
     //should move the piece to the desired location only if this is a legal move.
     //use the pieces "legal move" function to determine if this move is legal, then complete it by
     //moving the new piece to it's new board location. 
-    private boolean isInCheck(boolean color){
-        //code HERE
-        return false;
+    public boolean isInCheck(boolean kingColor) {
+        Square kingSquare = null;
+       
+        //locates kings square
+        for (Square[] row : board) {
+            for (Square s : row) {
+                if (s.isOccupied() && s.getOccupyingPiece() instanceof King &&
+                        s.getOccupyingPiece().getColor() == kingColor) {
+                    kingSquare = s;
+                    break;
+                }
+            }
+            if (kingSquare != null)
+                break;
+        }
+
+        if (kingSquare == null)
+            return false; 
+        //this checks if any of the opposing pieces can move to the kings square/take the king
+        for (Square[] row : board) {
+            for (Square s : row) {
+                if (s.isOccupied() && s.getOccupyingPiece().getColor() != kingColor) {
+                    Piece enemyPiece = s.getOccupyingPiece();
+                    if (enemyPiece.getLegalMoves(this, s).contains(kingSquare)) {
+                        return true; // King is in check
+                    }
+                }
+            }
+        }
+
+        return false; 
+
     }
 
     // Precondition: A mouse event occurs and any referenced squares or pieces are properly initialized.
